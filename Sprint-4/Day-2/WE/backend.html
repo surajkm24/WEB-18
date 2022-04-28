@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            display:grid;
+            gap:10px;
+            width:400px;
+            margin:auto;
+            font-size:20px;
+            font-family:sans-serif;
+            padding:20px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            margin-top:20px;
+            border-radius:10px;
+        }
+        input{
+            height:40px;
+            border-radius:5px;
+            border:rgba(78, 74, 74, 0.316) 1px solid;
+            font-size:17px;
+            padding:0px 10px;;
+        }
+        #nav{
+            display:flex;
+            width:98%;
+            justify-content: space-around;
+            font-size:20px;
+            font-family:sans-serif;
+            background-color:rgb(8, 251, 190);
+            margin:auto;
+            border-radius:10px;
+        }
+        h3{
+            background-color:rgb(241, 65, 103);
+            padding:10px;
+            border-radius:5px;
+            cursor:pointer;
+            color:whitesmoke;
+        }
+        
+        a{
+            text-decoration: none;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <h3><a href="backend.html">Backend</a></h3>
+        <h3><a href="frontend.html">Frontend</a></h3>
+    </div>
+    <form>
+        <label>Name</label>
+        <input id="name" type="text" placeholder="Enter Name"/>
+        <label>Image</label>
+        <input id="imgURL" type="text" placeholder="Enter Image URL"/>
+        <label>Company Logo</label>
+        <input id="companyLogo" type="text" placeholder="Enter Logo URL"/>
+        <label>Position</label>
+        <input id="role" type="text" placeholder="Enter role"/>
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+</html>
+<script>
+var investorsData =JSON.parse(localStorage.getItem("investorsData"))|| [];
+document.querySelector("form").addEventListener("submit",myFunction);
+function myFunction(){
+  event.preventDefault();
+  var form = document.querySelector("form");
+  var dataObj = {
+      name:form.name.value,
+      image:form.imgURL.value,
+      logo:form.companyLogo.value,
+      role:form.role.value,
+    }
+  if(form.name.value===""){
+      alert("Please enter name!")
+  }
+  else if(form.imgURL.value===""){
+      alert("Please enter image URL!")
+  }
+  else if(form.companyLogo.value===""){
+      alert("Please enter logo URL!")
+  }
+  else if(form.role.value===""){
+      alert("Please enter position held by person in company!")
+  }
+  else {
+    investorsData.push(dataObj);
+    localStorage.setItem("investorsData",JSON.stringify(investorsData));
+}
+}
+</script>
