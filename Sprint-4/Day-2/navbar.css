@@ -1,0 +1,17 @@
+#nav{
+    display:flex;
+    gap:30px;
+    justify-content:space-between;
+    margin:auto;
+    background-color:rgba(6, 37, 71, 0.947);
+    color:white;
+    padding:0px 50px;
+    border-radius:10px;
+}
+#nav>div>p{
+    cursor:pointer;
+}
+#nav>div{
+    display:flex;
+    gap:60px;
+}
