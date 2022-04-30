@@ -9,19 +9,19 @@
     <link rel="stylesheet" href="navbar.css">
     <style>
         form{
-            width:450px;
+            width:400px;
             display:grid;
             gap:20px;
             font-family:sans-serif;
             padding: 10px 30px 30px;
             margin:auto;
             margin-top:40px;
-            font-size:20px;
+            font-size:18px;
             font-weight:lighter;
         }
         #login{
             box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
-            width:540px;
+            width:500px;
             margin:auto;
             border-radius:10px;
             padding-bottom:15px;
@@ -34,7 +34,7 @@
             border-radius:5px;
             border:rgba(128, 128, 128, 0.23) solid 0.1px;
             padding:0px 20px;
-            font-size:18px;
+            font-size:16.4px;
         }
         input:last-child{
             height:55px;
@@ -42,7 +42,7 @@
         }
         #accDoesntExists {
             text-align: center;
-            font-size: 20px;
+            font-size: 19px;
             font-family: sans-serif;
         }
 
@@ -54,7 +54,7 @@
 
 <body>
     <div id="nav">
-        <p>Rebook</p>
+        <p onclick="homePage()">Rebook</p>
         <div>
         <p onclick="mensPage()">Men</p>
         <p onclick="womensPage()">Women</p>
@@ -65,8 +65,8 @@
     <div id="login">
     <form>
         <h2>Login</h2>
-        <input id="email" type="email" placeholder="Enter Email" />
-        <input id="password" type="password"  placeholder="Enter Password" />
+        <input id="email" type="email" placeholder="Enter Email" required />
+        <input id="password" type="password" minlength="8" maxlength="12" placeholder="Enter Password" required />
         <input type="submit" value="LOGIN" />
     </form>
     <p id="accDoesntExists">Don't have an account? <a href="signup.html">Create New Account</a></p>
@@ -76,6 +76,10 @@
 
 </html>
 <script>
+    
+  function homePage() {
+    window.location.href="index.html"
+  }
     var redirect = localStorage.getItem("redirect");
     document.querySelector("form").addEventListener("submit",myFunction);
     var userDataArr = JSON.parse(localStorage.getItem("userData"))||[];
@@ -86,10 +90,16 @@
         var password = document.querySelector("#password").value;
         userDataArr.forEach(function(ele){
             if(ele.email==email && ele.password==password){
+                storeUserData(ele);
                 flag = true;
             }
             console.log(ele);
         }) 
+
+
+        function storeUserData(ele){
+            localStorage.setItem("loginInformation",JSON.stringify(ele));
+        }
 
         if(flag){
             alert("Successfully logged in!");
@@ -98,6 +108,9 @@
             if(redirect){
                 localStorage.removeItem("redirect");
                 window.location.href = redirect;
+            }
+            else{
+                window.location.href="index.html"
             }
         }
         else {

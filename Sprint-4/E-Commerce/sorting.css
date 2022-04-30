@@ -1,0 +1,14 @@
+#sorting>select{
+    padding: 2px 5px;
+    border-radius:4px;
+    font-size:17px;
+    margin-bottom:20px;
+    font-family:sans-serif;
+    font-weight:bold;
+    background-color:beige;
+    border: 3px solid rgb(20, 20, 140);
+}
+#sorting>select:hover{
+    opacity:0.8;
+    cursor:pointer;
+}

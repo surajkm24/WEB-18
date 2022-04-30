@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        form {
+            width: 400px;
+            display: grid;
+            gap: 20px;
+            font-family: sans-serif;
+            padding: 10px 30px 30px;
+            margin: auto;
+            margin-top: 40px;
+            font-size: 18px;
+            font-weight: lighter;
+        }
+
+        #payment {
+            box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+            width: 500px;
+            margin: auto;
+            border-radius: 10px;
+            padding-bottom: 20px;
+            margin-bottom:30px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            height: 55px;
+            border-radius: 5px;
+            border: rgba(128, 128, 128, 0.23) solid 0.1px;
+            padding: 0px 20px;
+            font-size: 16.4px;
+            font-family:sans-serif;
+        }
+
+        input:last-child {
+            height: 55px;
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <p onclick="homePage()">Rebook</p>
+        <div id="bar">
+        <p onclick="mensPage()">Men</p>
+        <p onclick="womensPage()">Women</p>
+        <p onclick="loginPage()">Login</p>
+        <p onclick="signupPage()">Signup</p>
+    </div>
+    </div>
+    <div id="payment">
+        <form id="form">
+            <h2>Payment Details</h2>
+            <label>Name</label>
+            <input id="name" type="text" placeholder="Enter Name" minlength="5" required />
+            <label>Card Number</label>
+            <input id="cnumber" type="number" placeholder="Enter Card Number" required />
+            <label>CVV</label>
+            <input id="cvv" type="number" placeholder="Enter CVV" required />
+            <label>Expiry Date</label>
+            <input id="expiryDate"  type="month" required />
+            <input id="sub" type="submit" value="SUBMIT" />
+        </form>
+    </div>
+</body>
+</html>
+<script>
+    
+  function homePage() {
+    window.location.href="index.html"
+  }
+    document.querySelector("form").addEventListener("submit",paymentFunction);
+    function paymentFunction(){
+        event.preventDefault();
+        var name = document.querySelector("#name").value;
+        var cardNo = document.querySelector("#cnumber").value;
+        var cvv = document.querySelector("#cvv").value;
+        if(cardNo.length!==16){
+            alert("Error! Enter valid card details.")
+        }
+        else if(cvv.length!==3){
+            alert("Error! Enter valid card details.")
+        }
+        else {
+            window.location.href="OTP.html"
+        }
+    }
+    function cartPage() {
+    window.location.href="cart.html"
+  }
+   function userPage() {
+    window.location.href="user.html"
+  }
+  var token = localStorage.getItem("token");
+  var user1 = document.querySelector("#bar");
+  if(token){
+    var men = document.createElement("p")
+    men.setAttribute("onclick","mensPage()")
+    men.innerText="Men"
+    var women = document.createElement("p")
+    women.setAttribute("onclick","womensPage()")
+    women.innerText="Women"
+    var user = document.createElement("p")
+    user.setAttribute("onclick","userPage()")
+    user.innerText="User"
+    var cart = document.createElement("p")
+    cart.setAttribute("onclick","cartPage()")
+    cart.innerText="Cart"
+    user1.innerHTML="";
+    user1.append(men,women,user,cart);
+  }
+</script>

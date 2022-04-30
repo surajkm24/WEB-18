@@ -1,77 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Women</title>
-    <link rel="stylesheet" href="navbar.css">
-    <style>
-      #container{
-        display:grid;
-        grid-template-columns:repeat(4,1fr);
-        width:100%;
-        gap:20px;
-        font-family:sans-serif;
-      }
-      #container>div{
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        border-radius:10px;
-        padding:0px 0px 10px 0px;
-      }
-      #container>div>div{
-        display:flex;
-        justify-content: space-between;
-        padding:0px 15px;
-        margin-top:-40px;
-      }
-      #container>div>div>p+p{
-        text-decoration: line-through;
-        color:grey;
-      }
-      img{
-        width:100%;
-        border-radius:
-      }
-      button{
-        margin:0px 15px;
-        border-radius:4px;
-        font-size:17px;
-        border:3px blue solid;
-        background-color: whitesmoke;
-        color:blue;
 
-      }
-      h4{
-        padding:15px;
-        margin-top:-15px;
-      }
-    </style>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women</title>
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="sorting.css">
+  <style>
+    body{
+      font-family:sans-serif;
+    }
+    #container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      width: 100%;
+      gap: 20px;
+      font-family: sans-serif;
+    }
+
+    #container>div {
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      border-radius: 10px;
+      padding: 0px 0px 10px 0px;
+    }
+
+    #container>div>div {
+      display: flex;
+      justify-content: space-between;
+      padding: 0px 15px;
+      margin-top: -40px;
+    }
+
+    #container>div>div>p+p {
+      text-decoration: line-through;
+      color: grey;
+    }
+
+    img {
+      width: 100%;
+      border-radius:10px;
+    }
+
+    button {
+      margin: 0px 15px;
+      border-radius: 4px;
+      font-size: 17px;
+      border:rgb(36, 20, 135) 3px solid;;
+      background-color: rgb(36, 20, 135);
+      color: rgb(255, 255, 255);
+      padding:4px 5px;
+    }
+    button:hover{
+      cursor:pointer;
+      color:blue;
+      border:3px solid blue;
+      background-color: beige;
+    }
+
+    h4 {
+      padding: 15px;
+      margin-top: -15px;
+    }
+    h4+h4{
+      margin-top:-40px;
+    }
+  </style>
 </head>
+
 <body>
   <div id="nav">
-    <p>Rebook</p>
-    <div>
-    <p onclick="mensPage()">Men</p>
-    <p onclick="womensPage()">Women</p>
-    <p onclick="loginPage()">Login</p>
-    <p onclick="signupPage()">Signup</p>
-</div>
-</div>
+    <p onclick="homePage()">Rebook</p>
+    <div id="bar">
+      <p onclick="mensPage()">Men</p>
+      <p onclick="womensPage()">Women</p>
+      <p onclick="loginPage()">Login</p>
+      <p onclick="signupPage()">Signup</p>
+    </div>
+  </div>
   <h2>Womens Page</h2>
+  <div id="sorting">
+    <select id="sortPrice" onchange="sortByPrice()"> 
+      <option value="">Sort By Price</option>
+      <option value="Low to High">Low to High</option>
+      <option value="High to Low">High to Low</option>
+    </select>
+    <select id="sortName" onchange="sortByName()">
+      <option value="">Sort By Name</option>
+      <option value="Ascending">Ascending</option>
+      <option value="Descending">Descending</option>
+    </select>
+    <select id="filter" onchange="filterByCategory()">
+      <option value="">Filter By Category</option>
+      <option value="Adidas">Adidas</option>
+      <option value="Nike">Nike</option>
+      <option value="Puma">Puma</option>
+      <option value="Guchi">Guchi</option>
+      <option value="Prada">Prada</option>
+      <option value="Armani">Armani</option>
+      <option value="Rolex">Rolex</option>
+      <option value="Zara">Zara</option>
+      <option value="Old Navy">Old Navy</option>
+      <option value="Jaguar">Jaguar</option>
+    </select>
+  </div>
   <div id="container"></div>
-    
+
 </body>
+
 </html>
 <script>
-   var cartArr = JSON.parse(localStorage.getItem("cartData"))||[];
-var womensData = [
+  
+  function homePage() {
+    window.location.href="index.html"
+  }
+  var cartArr = JSON.parse(localStorage.getItem("cartData")) || [];
+  var womensData = [
     {
       image_url:
         "https://content.shop4reebok.com/static/Product-GL2296/reebok_GL2296_1.jpg.plp",
       name: "WOMEN'S REEBOK PRINT LEGGINGS ",
       price: 1549,
       strikedoffprice: 1799,
+      brand: "Zara",
     },
     {
       image_url:
@@ -79,6 +131,7 @@ var womensData = [
       name: "WOMEN'S REEBOK POLYTIGHT",
       price: 1249,
       strikedoffprice: 1749,
+      brand: "Puma",
     },
     {
       image_url:
@@ -86,6 +139,7 @@ var womensData = [
       name: "WOMEN'S REEBOK SLEEVE TEE",
       price: 699,
       strikedoffprice: 1245,
+      brand: "Zara",
     },
     {
       image_url:
@@ -93,6 +147,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Adidas",
     },
     {
       image_url:
@@ -100,6 +155,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Flite",
     },
     {
       image_url:
@@ -107,6 +163,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC LEGGINGS",
       price: 1399,
       strikedoffprice: 2799,
+      brand: "Prada",
     },
     {
       image_url:
@@ -114,6 +171,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC TIGHTS",
       price: 1099,
       strikedoffprice: 1249,
+      brand: "Guchi",
     },
     {
       image_url:
@@ -121,6 +179,7 @@ var womensData = [
       name: "UNISEX REEBOK SHOW SHOES",
       price: 1249,
       strikedoffprice: 1489,
+      brand: "Prada",
     },
     {
       image_url:
@@ -128,6 +187,7 @@ var womensData = [
       name: "WOMEN'S CLASSIC REEBOK PANTS",
       price: 1459,
       strikedoffprice: 1235,
+      brand: "Guchi",
     },
     {
       image_url:
@@ -135,6 +195,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING RUN ESSENTIALS SHORT SLEEVE GRAPHIC",
       price: 849,
       strikedoffprice: 2599,
+      brand: "Prada",
     },
     {
       image_url:
@@ -142,6 +203,7 @@ var womensData = [
       name: "WOMEN'S REEBOK TRAINING WOR MESH TIGHTS",
       price: 1550,
       strikedoffprice: 2599,
+      brand: "Armani",
     },
     {
       image_url:
@@ -149,6 +211,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING OSR HIGH-IMPACT BRA",
       price: 1399,
       strikedoffprice: 6599,
+      brand: "Armani",
     },
     {
       image_url:
@@ -156,6 +219,7 @@ var womensData = [
       name: "UNISEX REEBOK TRAINING ACTIVE CORE BACKPACK - MEDIUM",
       price: 949,
       strikedoffprice: 1899,
+      brand: "Armani",
     },
     {
       image_url:
@@ -163,6 +227,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PRINT LEGGINGS ",
       price: 1549,
       strikedoffprice: 1799,
+      brand: "Adidas",
     },
     {
       image_url:
@@ -170,6 +235,7 @@ var womensData = [
       name: "WOMEN'S REEBOK POLYTIGHT",
       price: 1249,
       strikedoffprice: 1749,
+      brand: "Zara",
     },
     {
       image_url:
@@ -177,6 +243,7 @@ var womensData = [
       name: "WOMEN'S REEBOK SLEEVE TEE",
       price: 699,
       strikedoffprice: 1245,
+      brand: "Puma",
     },
     {
       image_url:
@@ -184,6 +251,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Zara",
     },
     {
       image_url:
@@ -191,6 +259,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Jaguar",
     },
     {
       image_url:
@@ -198,6 +267,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC LEGGINGS",
       price: 1399,
       strikedoffprice: 2799,
+      brand: "Rolex",
     },
     {
       image_url:
@@ -205,6 +275,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC TIGHTS",
       price: 1099,
       strikedoffprice: 1249,
+      brand: "Jaguar",
     },
     {
       image_url:
@@ -212,6 +283,7 @@ var womensData = [
       name: "UNISEX REEBOK SHOW SHOES",
       price: 1249,
       strikedoffprice: 1489,
+      brand: "Rolex",
     },
     {
       image_url:
@@ -219,6 +291,7 @@ var womensData = [
       name: "WOMEN'S CLASSIC REEBOK PANTS",
       price: 1459,
       strikedoffprice: 1235,
+      brand: "Lakme",
     },
     {
       image_url:
@@ -226,6 +299,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING RUN ESSENTIALS SHORT SLEEVE GRAPHIC",
       price: 849,
       strikedoffprice: 2599,
+      brand: "Puma",
     },
     {
       image_url:
@@ -233,6 +307,7 @@ var womensData = [
       name: "WOMEN'S REEBOK TRAINING WOR MESH TIGHTS",
       price: 1550,
       strikedoffprice: 2599,
+      brand: "Lakme",
     },
     {
       image_url:
@@ -240,6 +315,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING OSR HIGH-IMPACT BRA",
       price: 1399,
       strikedoffprice: 6599,
+      brand: "Lakme",
     },
     {
       image_url:
@@ -247,6 +323,7 @@ var womensData = [
       name: "UNISEX REEBOK TRAINING ACTIVE CORE BACKPACK - MEDIUM",
       price: 949,
       strikedoffprice: 1899,
+      brand: "Prada",
     },
     {
       image_url:
@@ -254,6 +331,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PRINT LEGGINGS ",
       price: 1549,
       strikedoffprice: 1799,
+      brand: "Puma",
     },
     {
       image_url:
@@ -261,6 +339,7 @@ var womensData = [
       name: "WOMEN'S REEBOK POLYTIGHT",
       price: 1249,
       strikedoffprice: 1749,
+      brand: "Zara",
     },
     {
       image_url:
@@ -268,6 +347,7 @@ var womensData = [
       name: "WOMEN'S REEBOK SLEEVE TEE",
       price: 699,
       strikedoffprice: 1245,
+      brand: "Adidas",
     },
     {
       image_url:
@@ -275,6 +355,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Zara",
     },
     {
       image_url:
@@ -282,6 +363,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Guchi",
     },
     {
       image_url:
@@ -289,6 +371,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC LEGGINGS",
       price: 1399,
       strikedoffprice: 2799,
+      brand: "Zara",
     },
     {
       image_url:
@@ -296,6 +379,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC TIGHTS",
       price: 1099,
       strikedoffprice: 1249,
+      brand: "Levis",
     },
     {
       image_url:
@@ -303,6 +387,7 @@ var womensData = [
       name: "UNISEX REEBOK SHOW SHOES",
       price: 1249,
       strikedoffprice: 1489,
+      brand: "Levis",
     },
     {
       image_url:
@@ -310,6 +395,7 @@ var womensData = [
       name: "WOMEN'S CLASSIC REEBOK PANTS",
       price: 1459,
       strikedoffprice: 1235,
+      brand: "Levis",
     },
     {
       image_url:
@@ -317,6 +403,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING RUN ESSENTIALS SHORT SLEEVE GRAPHIC",
       price: 849,
       strikedoffprice: 2599,
+      brand: "Levis",
     },
     {
       image_url:
@@ -324,6 +411,7 @@ var womensData = [
       name: "WOMEN'S REEBOK TRAINING WOR MESH TIGHTS",
       price: 1550,
       strikedoffprice: 2599,
+      brand: "Levis",
     },
     {
       image_url:
@@ -331,6 +419,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING OSR HIGH-IMPACT BRA",
       price: 1399,
       strikedoffprice: 6599,
+      brand: "Levis",
     },
     {
       image_url:
@@ -338,6 +427,7 @@ var womensData = [
       name: "UNISEX REEBOK TRAINING ACTIVE CORE BACKPACK - MEDIUM",
       price: 949,
       strikedoffprice: 1899,
+      brand: "Nike",
     },
     {
       image_url:
@@ -345,6 +435,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PRINT LEGGINGS ",
       price: 1549,
       strikedoffprice: 1799,
+      brand: "Nike",
     },
     {
       image_url:
@@ -352,6 +443,7 @@ var womensData = [
       name: "WOMEN'S REEBOK POLYTIGHT",
       price: 1249,
       strikedoffprice: 1749,
+      brand: "Nike",
     },
     {
       image_url:
@@ -359,6 +451,7 @@ var womensData = [
       name: "WOMEN'S REEBOK SLEEVE TEE",
       price: 699,
       strikedoffprice: 1245,
+      brand: "Nike",
     },
     {
       image_url:
@@ -366,6 +459,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Old Navy",
     },
     {
       image_url:
@@ -373,6 +467,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Old Navy",
     },
     {
       image_url:
@@ -380,6 +475,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC LEGGINGS",
       price: 1399,
       strikedoffprice: 2799,
+      brand: "Old Navy",
     },
     {
       image_url:
@@ -387,6 +483,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC TIGHTS",
       price: 1099,
       strikedoffprice: 1249,
+      brand: "Old Navy",
     },
     {
       image_url:
@@ -394,6 +491,7 @@ var womensData = [
       name: "UNISEX REEBOK SHOW SHOES",
       price: 1249,
       strikedoffprice: 1489,
+      brand: "Old Navy",
     },
     {
       image_url:
@@ -401,6 +499,7 @@ var womensData = [
       name: "WOMEN'S CLASSIC REEBOK PANTS",
       price: 1459,
       strikedoffprice: 1235,
+      brand: "Nike",
     },
     {
       image_url:
@@ -408,6 +507,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING RUN ESSENTIALS SHORT SLEEVE GRAPHIC",
       price: 849,
       strikedoffprice: 2599,
+      brand: "Prada",
     },
     {
       image_url:
@@ -415,6 +515,7 @@ var womensData = [
       name: "WOMEN'S REEBOK TRAINING WOR MESH TIGHTS",
       price: 1550,
       strikedoffprice: 2599,
+      brand: "Guchi",
     },
     {
       image_url:
@@ -422,6 +523,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING OSR HIGH-IMPACT BRA",
       price: 1399,
       strikedoffprice: 6599,
+      brand: "Armani",
     },
     {
       image_url:
@@ -429,6 +531,7 @@ var womensData = [
       name: "UNISEX REEBOK TRAINING ACTIVE CORE BACKPACK - MEDIUM",
       price: 949,
       strikedoffprice: 1899,
+      brand: "Armani",
     },
     {
       image_url:
@@ -436,6 +539,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PRINT LEGGINGS ",
       price: 1549,
       strikedoffprice: 1799,
+      brand: "Armani",
     },
     {
       image_url:
@@ -443,6 +547,7 @@ var womensData = [
       name: "WOMEN'S REEBOK POLYTIGHT",
       price: 1249,
       strikedoffprice: 1749,
+      brand: "Prada",
     },
     {
       image_url:
@@ -450,6 +555,7 @@ var womensData = [
       name: "WOMEN'S REEBOK SLEEVE TEE",
       price: 699,
       strikedoffprice: 1245,
+      brand: "Zara",
     },
     {
       image_url:
@@ -457,6 +563,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Nike",
     },
     {
       image_url:
@@ -464,6 +571,7 @@ var womensData = [
       name: "WOMEN'S REEBOK PP TIGHTS",
       price: 749,
       strikedoffprice: 1299,
+      brand: "Zara",
     },
     {
       image_url:
@@ -471,6 +579,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC LEGGINGS",
       price: 1399,
       strikedoffprice: 2799,
+      brand: "Zara",
     },
     {
       image_url:
@@ -478,6 +587,7 @@ var womensData = [
       name: "WOMEN'S REEBOK CLASSIC TIGHTS",
       price: 1099,
       strikedoffprice: 1249,
+      brand: "Adidas",
     },
     {
       image_url:
@@ -485,6 +595,7 @@ var womensData = [
       name: "UNISEX REEBOK SHOW SHOES",
       price: 1249,
       strikedoffprice: 1489,
+      brand: "Adidas",
     },
     {
       image_url:
@@ -492,6 +603,7 @@ var womensData = [
       name: "WOMEN'S CLASSIC REEBOK PANTS",
       price: 1459,
       strikedoffprice: 1235,
+      brand: "Adidas",
     },
     {
       image_url:
@@ -499,6 +611,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING RUN ESSENTIALS SHORT SLEEVE GRAPHIC",
       price: 849,
       strikedoffprice: 2599,
+      brand: "Adidas",
     },
     {
       image_url:
@@ -506,6 +619,7 @@ var womensData = [
       name: "WOMEN'S REEBOK TRAINING WOR MESH TIGHTS",
       price: 1550,
       strikedoffprice: 2599,
+      brand: "Zara",
     },
     {
       image_url:
@@ -513,6 +627,7 @@ var womensData = [
       name: "WOMEN'S REEBOK RUNNING OSR HIGH-IMPACT BRA",
       price: 1399,
       strikedoffprice: 6599,
+      brand: "Zara",
     },
     {
       image_url:
@@ -520,81 +635,203 @@ var womensData = [
       name: "UNISEX REEBOK TRAINING ACTIVE CORE BACKPACK - MEDIUM",
       price: 949,
       strikedoffprice: 1899,
+      brand: "Zara",
     },
   ];
 
-  womensData.forEach(function(elem){
-    var card = document.createElement("div");
+  displayData(womensData);
+  function displayData(womensData) {
+    document.querySelector("#container").innerHTML = "";
+    womensData.forEach(function (elem) {
+      var card = document.createElement("div");
 
-    var image = document.createElement("img");
-    image.setAttribute("src",elem.image_url);
+      var image = document.createElement("img");
+      image.setAttribute("src", elem.image_url);
 
-    var dname = document.createElement("h4");
-    dname.innerText = elem.name;
+      var dname = document.createElement("h4");
+      dname.innerText = elem.name;
 
-    var dprice = document.createElement("p");
-    dprice.innerText = elem.price;
+      var dbrand = document.createElement("h4");
+      dbrand.innerText = elem.brand;
 
-    var sdprice = document.createElement("p");
-    sdprice.innerText = elem.strikedoffprice;
 
-    var card1 = document.createElement("div");
-    card1.append(dprice,sdprice);
+      var dprice = document.createElement("p");
+      dprice.innerText = elem.price;
 
-    var btn = document.createElement("button");
-    btn.innerText = "Add to Cart";
-    btn.addEventListener("click",function(){
-      addToCart(elem);
-    })
+      var sdprice = document.createElement("p");
+      sdprice.innerText = elem.strikedoffprice;
 
-    card.append(image,dname,card1,btn);
-    document.querySelector("#container").append(card);
+      var card1 = document.createElement("div");
+      card1.append(dprice, sdprice);
 
-    function addToCart(elem){
-      var flag = true;
-        cartArr.forEach(function(ele){
-          if(elem.image_url===ele.image_url&&elem.name===ele.name&&elem.price===ele.price&&elem.strikedoffprice===ele.strikedoffprice){
+      var btn = document.createElement("button");
+      btn.innerText = "Add to Cart";
+      btn.addEventListener("click", function () {
+        addToCart(elem);
+      })
+
+      card.append(image, dname, dbrand, card1, btn);
+      document.querySelector("#container").append(card);
+
+      function addToCart(elem) {
+        var flag = true;
+        cartArr.forEach(function (ele) {
+          if (elem.image_url === ele.image_url && elem.name === ele.name && elem.price === ele.price && elem.strikedoffprice === ele.strikedoffprice) {
             flag = false;
           }
         })
-       if(flag) {
-        cartArr.push(elem);
-        localStorage.setItem("cartData",JSON.stringify(cartArr));
-        alert("Item added successfully!")
+        if (flag) {
+          cartArr.push(elem);
+          localStorage.setItem("cartData", JSON.stringify(cartArr));
+          alert("Item added successfully!")
+        }
+        else {
+          alert("Item already added!")
+        }
+
+      }
+    })
+  }
+
+  function sortByPrice(){
+   var option = document.querySelector("#sortPrice").value;
+   if(option==="Low to High"){
+     womensData.sort(function(a,b){
+       var a = +a.price;
+       var b = +b.price;
+       if(a<b){
+         return -1;
+       }
+       else if(a>b){
+         return 1;
        }
        else {
-         alert("Item already added!")
+         return 0;
        }
-        
-    }
-  })
-  function signupPage() {
-        window.location.href = "signup.html"
-    }
-    function loginPage() {
-        window.location.href = "login.html"
-    }
-    function mensPage() {
-        var token = localStorage.getItem("token");
-        if (token) {
-            window.location.href = "mens.html"
-        }
-        else {
-            alert("Please login to start using our services!");
-            window.location.href = "login.html"
-        }
-    }
-    function womensPage() {
-        var token = localStorage.getItem("token");
-        if (token) {
-            window.location.href = "womens.html"
-        }
-        else {
-            alert("Please login to start using our services!");
-            window.location.href = "login.html"
-        }
-    }
+     })
+     displayData(womensData)
+   }
+   if(option==="High to Low"){
+     womensData.sort(function(a,b){
+       var a = +a.price;
+       var b = +b.price;
+       if(a<b){
+         return 1;
+       }
+       else if(a>b){
+         return -1;
+       }
+       else {
+         return 0;
+       }
+     })
+     displayData(womensData)
+   }
+ }
+ 
+ function sortByName(){
+   var option = document.querySelector("#sortName").value;
+   if(option==="Ascending"){
+     womensData.sort(function(a,b){
+       var a = a.name;
+       var b = b.name;
+       if(a<b){
+         return -1;
+       }
+       else if(a>b){
+         return 1;
+       }
+       else {
+         return 0;
+       }
+     })
+     displayData(womensData)
+   }
+   if(option==="Descending"){
+     womensData.sort(function(a,b){
+       var a = a.name;
+       var b = b.name;
+       if(a<b){
+         return 1;
+       }
+       else if(a>b){
+         return -1;
+       }
+       else {
+         return 0;
+       }
+     })
+     displayData(womensData)
+   }
+ }
+ 
+ function filterByCategory(){
+   var option = document.querySelector("#filter").value;
+   var newArr = [];
+   if(option===""){
+     displayData(womensData)
+   }
+   else {
+   newArr = womensData.filter(function(ele){
+     return ele.brand===option;
+   })
+   displayData(newArr)
+ }
+}
 
+
+
+
+  function signupPage() {
+    window.location.href = "signup.html"
+  }
+  function loginPage() {
+    window.location.href = "login.html"
+  }
+  function mensPage() {
+    var token = localStorage.getItem("token");
+    if (token) {
+      window.location.href = "mens.html"
+    }
+    else {
+      alert("Please login to start using our services!");
+      window.location.href = "login.html"
+    }
+  }
+  function womensPage() {
+    var token = localStorage.getItem("token");
+    if (token) {
+      window.location.href = "womens.html"
+    }
+    else {
+      alert("Please login to start using our services!");
+      window.location.href = "login.html"
+    }
+  }
+  function cartPage() {
+    window.location.href="cart.html"
+  }
+  function userPage() {
+    window.location.href="user.html"
+  }
+  var token = localStorage.getItem("token");
+  var user1 = document.querySelector("#bar");
+  if(token){
+    var men = document.createElement("p")
+    men.setAttribute("onclick","mensPage()")
+    men.innerText="Men"
+    var women = document.createElement("p")
+    women.setAttribute("onclick","womensPage()")
+    women.innerText="Women"
+    var user = document.createElement("p")
+    user.setAttribute("onclick","userPage()")
+    user.innerText="User"
+    var cart = document.createElement("p")
+    cart.setAttribute("onclick","cartPage()")
+    cart.innerText="Cart"
+    user1.innerHTML="";
+    user1.append(men,women,user,cart);
+  }
 
 
 </script>
