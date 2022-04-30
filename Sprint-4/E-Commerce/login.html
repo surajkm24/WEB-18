@@ -8,38 +8,43 @@
     <title>Document</title>
     <link rel="stylesheet" href="navbar.css">
     <style>
-        form{
-            width:400px;
-            display:grid;
-            gap:20px;
-            font-family:sans-serif;
+        form {
+            width: 400px;
+            display: grid;
+            gap: 20px;
+            font-family: sans-serif;
             padding: 10px 30px 30px;
-            margin:auto;
-            margin-top:40px;
-            font-size:18px;
-            font-weight:lighter;
+            margin: auto;
+            margin-top: 40px;
+            font-size: 18px;
+            font-weight: lighter;
         }
-        #login{
+
+        #login {
             box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
-            width:500px;
-            margin:auto;
-            border-radius:10px;
-            padding-bottom:15px;
+            width: 500px;
+            margin: auto;
+            border-radius: 10px;
+            padding-bottom: 15px;
         }
-        h2{
-            text-align:center;
+
+        h2 {
+            text-align: center;
         }
-        input{
-            height:55px;
-            border-radius:5px;
-            border:rgba(128, 128, 128, 0.23) solid 0.1px;
-            padding:0px 20px;
-            font-size:16.4px;
+
+        input {
+            height: 55px;
+            border-radius: 5px;
+            border: rgba(128, 128, 128, 0.23) solid 0.1px;
+            padding: 0px 20px;
+            font-size: 16.4px;
         }
-        input:last-child{
-            height:55px;
-            color:grey;
+
+        input:last-child {
+            height: 55px;
+            color: grey;
         }
+
         #accDoesntExists {
             text-align: center;
             font-size: 19px;
@@ -56,67 +61,67 @@
     <div id="nav">
         <p onclick="homePage()">Rebook</p>
         <div>
-        <p onclick="mensPage()">Men</p>
-        <p onclick="womensPage()">Women</p>
-        <p onclick="loginPage()">Login</p>
-        <p onclick="signupPage()">Signup</p>
-    </div>
+            <p onclick="mensPage()">Men</p>
+            <p onclick="womensPage()">Women</p>
+            <p onclick="loginPage()">Login</p>
+            <p onclick="signupPage()">Signup</p>
+        </div>
     </div>
     <div id="login">
-    <form>
-        <h2>Login</h2>
-        <input id="email" type="email" placeholder="Enter Email" required />
-        <input id="password" type="password" minlength="8" maxlength="12" placeholder="Enter Password" required />
-        <input type="submit" value="LOGIN" />
-    </form>
-    <p id="accDoesntExists">Don't have an account? <a href="signup.html">Create New Account</a></p>
-</div>
+        <form>
+            <h2>Login</h2>
+            <input id="email" type="email" placeholder="Enter Email" required />
+            <input id="password" type="password" minlength="8" maxlength="12" placeholder="Enter Password" required />
+            <input type="submit" value="LOGIN" />
+        </form>
+        <p id="accDoesntExists">Don't have an account? <a href="signup.html">Create New Account</a></p>
+    </div>
 
 </body>
 
 </html>
 <script>
-    
-  function homePage() {
-    window.location.href="index.html"
-  }
+
+    function homePage() {
+        window.location.href = "index.html"
+    }
     var redirect = localStorage.getItem("redirect");
-    document.querySelector("form").addEventListener("submit",myFunction);
-    var userDataArr = JSON.parse(localStorage.getItem("userData"))||[];
-    function myFunction () {
+    document.querySelector("form").addEventListener("submit", myFunction);
+    var userDataArr = JSON.parse(localStorage.getItem("userData")) || [];
+    function myFunction() {
         event.preventDefault();
         var flag = false;
         var email = document.querySelector("#email").value;
         var password = document.querySelector("#password").value;
-        userDataArr.forEach(function(ele){
-            if(ele.email==email && ele.password==password){
+        userDataArr.forEach(function (ele) {
+            if (ele.email == email && ele.password == password) {
                 storeUserData(ele);
                 flag = true;
             }
             console.log(ele);
-        }) 
+        })
 
 
-        function storeUserData(ele){
-            localStorage.setItem("loginInformation",JSON.stringify(ele));
+        function storeUserData(ele) {
+            localStorage.setItem("loginInformation", JSON.stringify(ele));
         }
 
-        if(flag){
+        if (flag) {
             alert("Successfully logged in!");
             var token = Math.random();
-            localStorage.setItem("token",token);
-            if(redirect){
+            localStorage.setItem("token", token);
+            if (redirect) {
                 localStorage.removeItem("redirect");
                 window.location.href = redirect;
             }
-            else{
-                window.location.href="index.html"
+            else {
+                window.location.href = "index.html"
             }
         }
         else {
             alert("Please enter correct email or password!");
         }
-     
+
     }
     function signupPage() {
         window.location.href = "signup.html"
@@ -132,7 +137,7 @@
         else {
             alert("Please login to start using our services!");
             var redirect = "mens.html";
-            localStorage.setItem("redirect",redirect);
+            localStorage.setItem("redirect", redirect);
             window.location.href = "login.html"
         }
     }
@@ -143,10 +148,10 @@
         }
         else {
             var redirect = "womens.html";
-            localStorage.setItem("redirect",redirect);
+            localStorage.setItem("redirect", redirect);
             alert("Please login to start using our services!");
             window.location.href = "login.html"
         }
     }
-   
+
 </script>
