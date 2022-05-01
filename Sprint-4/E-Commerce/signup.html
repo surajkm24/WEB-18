@@ -105,11 +105,21 @@
             number: form.number.value,
             password: form.password.value,
         }
-
+        var flag = false;
+        userDataArr.forEach(function(ele){
+            if(ele.name===dataObj.name&&ele.email===dataObj.email&&ele.number===dataObj.number){
+                flag = true;
+            }
+        })
+        if(flag){
+            alert("User with this credentials already exists! Try to login!")
+        }
+        else {
         userDataArr.push(dataObj)
         localStorage.setItem("userData", JSON.stringify(userDataArr))
         window.location.href = "login.html"
         form.reset();
+        }
     }
     function signupPage() {
         window.location.href = "signup.html"

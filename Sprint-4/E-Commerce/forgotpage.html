@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,12 +19,13 @@
             font-weight: lighter;
         }
 
-        #login {
+        #otp {
             box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
             width: 500px;
             margin: auto;
             border-radius: 10px;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
+            margin-bottom:30px;
         }
 
         h2 {
@@ -38,99 +38,38 @@
             border: rgba(128, 128, 128, 0.23) solid 0.1px;
             padding: 0px 20px;
             font-size: 16.4px;
+            font-family:sans-serif;
         }
 
         input:last-child {
             height: 55px;
             color: grey;
         }
-
-        #accDoesntExists {
-            text-align: center;
-            font-size: 19px;
-            font-family: sans-serif;
-        }
-
-        #accDoesntExists>a {
-            text-decoration: none;
-        }
     </style>
 </head>
-
 <body>
     <div id="nav">
         <p onclick="homePage()">Rebook</p>
-        <div>
+        <div id="bar">
             <p onclick="mensPage()">Men</p>
             <p onclick="womensPage()">Women</p>
             <p onclick="loginPage()">Login</p>
             <p onclick="signupPage()">Signup</p>
         </div>
     </div>
-    <div id="login">
-        <form>
-            <h2>Login</h2>
-            <input id="email" type="email" placeholder="Enter Email" required />
-            <input id="password" type="password" minlength="8" maxlength="12" placeholder="Enter Password" required />
-            <input type="submit" value="LOGIN" />
+    <div id="otp">
+        <form id="form">
+            <h2>Find Your</h2>
+            <label>Enter OTP</label>
+            <input id="enOtp" type="number" placeholder="Enter OTP" required />
+            <input id="sub" type="submit" value="SUBMIT" />
         </form>
-        <p id="accDoesntExists">Don't have an account? <a href="signup.html">Create New Account</a></p>
     </div>
-
 </body>
-
 </html>
 <script>
-
-    function homePage() {
+     function homePage() {
         window.location.href = "index.html"
-    }
-    var redirect = localStorage.getItem("redirect");
-    document.querySelector("form").addEventListener("submit", myFunction);
-    var userDataArr = JSON.parse(localStorage.getItem("userData")) || [];
-    function myFunction() {
-        event.preventDefault();
-        var flag = false;
-        var email = document.querySelector("#email").value;
-        var password = document.querySelector("#password").value;
-        userDataArr.forEach(function (ele) {
-            if (ele.email == email && ele.password == password) {
-                storeUserData(ele);
-                flag = true;
-            }
-            console.log(ele);
-        })
-
-
-        function storeUserData(ele) {
-            localStorage.setItem("loginInformation", JSON.stringify(ele));
-        }
-
-        if (flag) {
-            alert("Successfully logged in!");
-            var token = Math.random();
-            localStorage.setItem("token", token);
-            if (redirect) {
-                localStorage.removeItem("redirect");
-                window.location.href = redirect;
-            }
-            else {
-                window.location.href = "index.html"
-            }
-        }
-        else {
-            alert("Please enter correct email or password!");
-            var forgot = document.createElement("p");
-            forgot.setAttribute("onclick","forgotPage()");
-            forgot.innerText="Forgot Password?"
-            forgot.style.color="Blue"
-            forgot.style.cursor="pointer"
-            document.querySelector("form").append(forgot);
-        }
-
-    }
-    function forgotPage(){
-        window.location.href="forgotpage.html"
     }
     function signupPage() {
         window.location.href = "signup.html"
@@ -162,5 +101,4 @@
             window.location.href = "login.html"
         }
     }
-
 </script>
